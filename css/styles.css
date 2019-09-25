@@ -1,0 +1,55 @@
+.grid{
+    width: calc(100vw - 20px);
+    margin: 0;
+}
+.grid > ul{
+    width:100%;
+    /* border:1px solid green; */
+    padding: 0;
+    margin:0;
+}
+
+.grid > ul > li{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(60px,1fr)) minmax(60px,3fr) minmax(60px,2fr) minmax(60px,1fr) minmax(60px,6fr);
+    justify-items: stretch;
+    justify-content: stretch;
+    column-gap:5px;   
+    /* border:1px solid blue; */
+    width: 100%;  
+}
+
+/* .grid > ul > li > div{
+    border:1px solid red;
+} */
+
+.grid > ul > li > div > input{
+    width:100%;
+} 
+
+
+body{
+    color:black;
+    font-family: Helvetica;
+}
+
+.footer{
+    padding:20px 20px;
+    text-align: right;
+}
+input{
+    height:30px;
+}
+
+button{
+    height:30px;
+    width:150px;
+}
+
+.lbl{
+    height: 100%;
+    display: block;
+    font-weight: bold;
+    text-align: right;
+    padding: 15% 40%;
+}
