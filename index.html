@@ -3,39 +3,48 @@
 <head>
     <title>EquiRank</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/w3.css" />
 </head>
 
 <body ng-app="rank" ng-controller="rankCtrl as vm">
-    <div class="grid">
-        <ul>
-            <li class="grid-head">
-                <div>Puesto</div>
-                <div>Orden</div>
-                <div>Binomio</div>
-                <div>Tiempo</div>
-                <div>Faltas</div>
-                <div>Comentario</div>
-            </li>
-            <li ng-repeat="r in vm.datos">
-                <div><span class="lbl">{{$index+1}}</span></div>
-                <div><input type="number" ng-model="r.orden" /></div>
-                <div><input type="text" ng-model="r.binomio" /></div>
-                <div>
-                    <input type="text" ng-model="r.tiempo" mask="99:99.999" mask-restrict="reject" clean="true" mask-limit="true" />
-                    
-                </div>
-                <div><input type="number" ng-model="r.faltas" /></div>
-                <div><input type="text" ng-model="r.comentario" /></div>
-            </li>
-        </ul>
+
+    <div class="w3-bar w3-border-bottom w3-light-grey intronav">
+        <a class="w3-bar-item w3-button testbtn w3-dark-grey" id="linkCarga" ng-click="vm.tab=1">Carga</a>
+        <a class="w3-bar-item w3-button testbtn w3-dark-grey" id="linkResultados" ng-click="vm.tab=2">Resultados</a>
     </div>
-    <div class="footer">
-        <button ng-click="vm.calcular()">Calcular</button>
+        
+    <div ng-if="vm.tab==2">
+        <div>
+            <span class="lbl">Tiempo Referencia: </span>
+            <input type="text" ng-model="vm.tiempoReferencia" ng-change="vm.actualizarDiferencias()">
+        <div class="grid" >
+            <ul>
+                <li class="grid-head">
+                    <div>Puesto</div>                
+                    <div>Binomio</div>
+                    <div>Tiempo</div>
+                    <div>Faltas</div>
+                    <div>Diferencia</div>
+                    <div>Comentario</div>
+                </li>
+                <li ng-repeat="r in vm.datos">
+                    <div><span class="lbl">{{$index+1}}</span></div>                
+                    <div><span>{{r.binomio}}</span></div>
+                    <div><span>{{r.tiempo}}</span></div>                    
+                    <div><span>{{r.faltas}} </span></div>                    
+                    <div><span>{{r.diferencia}} </div>
+                    <div><span>{{r.comentario}} </div>
+                </li>
+            </ul>
+        </div>
+        <div class="footer">
+            <button ng-click="vm.exportar()">Exportar</button>
+        </div>
     </div>
 
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+<script src="js/angular.min.js"></script>
 <script src="js/ng-mask.min.js"></script>
 <script src="js/rank.module.js"></script>
 <script src="js/rank.controller.js"></script>
