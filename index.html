@@ -12,33 +12,71 @@
         <a class="w3-bar-item w3-button testbtn w3-dark-grey" id="linkCarga" ng-click="vm.tab=1">Carga</a>
         <a class="w3-bar-item w3-button testbtn w3-dark-grey" id="linkResultados" ng-click="vm.tab=2">Resultados</a>
     </div>
-        
-    <div ng-if="vm.tab==2">
-        <div>
-            <span class="lbl">Tiempo Referencia: </span>
-            <input type="text" ng-model="vm.tiempoReferencia" ng-change="vm.actualizarDiferencias()">
-        <div class="grid" >
-            <ul>
-                <li class="grid-head">
-                    <div>Puesto</div>                
-                    <div>Binomio</div>
-                    <div>Tiempo</div>
-                    <div>Faltas</div>
-                    <div>Diferencia</div>
-                    <div>Comentario</div>
-                </li>
-                <li ng-repeat="r in vm.datos">
-                    <div><span class="lbl">{{$index+1}}</span></div>                
-                    <div><span>{{r.binomio}}</span></div>
-                    <div><span>{{r.tiempo}}</span></div>                    
-                    <div><span>{{r.faltas}} </span></div>                    
-                    <div><span>{{r.diferencia}} </div>
-                    <div><span>{{r.comentario}} </div>
-                </li>
-            </ul>
+    <div ng-if="vm.tab==1">
+        <div class="form-carga">
+            <div>
+                <label><b>Binomio</b></label>
+                <input class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
+
+            </div>
+            <div>
+                <label><b>Tiempo</b></label>
+                <div style="display:grid; grid-template-columns: 1fr">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr">
+                        <button ng-mousedown="vm.add(1)" ng-mouseup="vm.stop()">+</button>
+                        <button ng-mousedown="vm.add(0.01)" ng-mouseup="vm.stop()">+</button>
+                    </div>
+                    <div>
+                        <input style="width: calc(100% - 1em);" type="number" ng-model="vm.new.tiempo">
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr">
+                        <button ng-mousedown="vm.sub(1)" ng-mouseup="vm.stop()">-</button>
+                        <button ng-mousedown="vm.sub(0.01)" ng-mouseup="vm.stop()">-</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label><b>Faltas</b></label>
+                <input class="w3-input w3-border" type="text" ng-model="vm.new.faltas">
+            </div>
+            <div>
+                <label><b>Comentario</b></label>
+                <textarea class="w3-input w3-border" type="text" ng-model="vm.new.comentario"></textarea>
+            </div>
+            <div>
+                <button class="w3-btn w3-blue" ng-click="vm.guardar(vm.new)">Guardar</button>
+            </div>
         </div>
-        <div class="footer">
-            <button ng-click="vm.exportar()">Exportar</button>
+    </div>
+    <div ng-if="vm.tab==2">
+        <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px">
+            <div style="display:grid; grid-template-columns: 1fr 1fr;">
+                <span style="text-align: right">Tiempo Referencia: </span>
+                <input type="number" ng-model="vm.tiempoReferencia" ng-change="vm.actualizarDiferencias()">
+            </div>
+            <div class="grid">
+                <ul>
+                    <li class="grid-head">
+                        <div>Puesto</div>
+                        <div>Binomio</div>
+                        <div>Tiempo</div>
+                        <div>Faltas</div>
+                        <div>Diferencia</div>
+                        <div>Comentario</div>
+                    </li>
+                    <li ng-repeat="r in vm.datos">
+                        <div><span class="lbl">{{$index+1}}</span></div>
+                        <div><span>{{r.binomio}}</span></div>
+                        <div><span>{{r.tiempo}}</span></div>
+                        <div><span>{{r.faltas}} </span></div>
+                        <div><span>{{r.diferencia}} </div>
+                        <div><span>{{r.comentario}} </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer">
+                <button ng-click="vm.exportar()">Exportar</button>
+            </div>
         </div>
     </div>
 
