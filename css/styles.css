@@ -50,11 +50,11 @@ tbody [rowspan],
 tbody [rowspan] ~ th,
 tbody [rowspan] ~ td,
 tfoot {
-  border-top: 1px solid gray;
+  border-top: 1px solid #ddd;
 }
 
 table {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #ddd;
   border-collapse: collapse;
   width: 100%;
 }

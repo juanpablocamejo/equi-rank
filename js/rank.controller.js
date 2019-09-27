@@ -6,6 +6,10 @@
             vm.tab = 1;
             vm.new = defaultItem();
 
+            // for (var i = 0; i < 8; i++) {
+            //     vm.datos.push(defaultItem('' + i));
+            // }
+
             vm.tiempoReferencia = 0.000;
             _add = (delta) => () => { vm.new.tiempo = +(vm.new.tiempo + delta).toFixed(2); }
             _sub = (delta) => () => { if (vm.new.tiempo > 0) vm.new.tiempo = +(vm.new.tiempo - delta).toFixed(2); }
@@ -15,18 +19,24 @@
             vm.sub = (delta) => _loop(_sub(delta))
 
             vm.stop = () => $interval.cancel(vm.interval);
-            vm.puedeGuardar = () => true
+            vm.puedeGuardar = () => {
+                var res = ![!!vm.new.binomio, !!vm.new.tiempo, !!vm.new.faltas].filter(x => !x).length
+                return res;
+            }
+            vm.puedeExportar = () => {
+                return !!vm.titulo && !!vm.tiempoReferencia
+            }
             vm.guardar = (elem) => {
                 vm.datos.push(elem)
                 vm.new = defaultItem();
                 vm.actualizarDiferencias();
             }
 
-            function defaultItem() {
+            function defaultItem(pre) {
                 return {
                     binomio: null,
-                    tiempo: 0.0,
-                    faltas: Math.floor(Math.random() * 10),
+                    tiempo: null,
+                    faltas: null,
                     comentario: null,
                     diferencia: 0
                 };

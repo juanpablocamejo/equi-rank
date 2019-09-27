@@ -34,20 +34,20 @@
             </div>
             <div>
                 <label><b>Faltas</b></label>
-                <input class="w3-input w3-border" type="text" ng-model="vm.new.faltas">
+                <input class="w3-input w3-border" type="number" ng-model="vm.new.faltas">
             </div>
             <div>
                 <label><b>Comentario</b></label>
                 <textarea class="w3-input w3-border" type="text" ng-model="vm.new.comentario"></textarea>
             </div>
             <div>
-                <button ng-if="vm.puedeGuardar()" style="margin-top: 20px; height: 50px;"
+                <button ng-disabled="!vm.puedeGuardar()" style="margin-top: 20px; height: 50px;"
                     class="w3-btn w3-teal w3-block" ng-click="vm.guardar(vm.new)">Guardar</button>
             </div>
         </div>
     </div>
     <div class="tab" ng-if="vm.tab==2">
-        <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px">
+        <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 20px min(5fr,60vh) 1fr">
             <div style=" margin-top:5px;">
                 <input class="w3-input w3-border" type="text" ng-model="vm.titulo" placeholder="Título">
             </div>
@@ -56,25 +56,35 @@
                 <input class="w3-input w3-border" type="number" ng-model="vm.tiempoReferencia"
                     ng-change="vm.actualizarDiferencias()">
             </div>
+            <div> <label><b>Resultados</b></label></div>
             <div style=" margin-top:10px;">
-                <table>
-                    <tr ng-repeat-start="r in vm.datos">
-                        <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
-                        <td colspan="2"><span>{{r.binomio}}</span></td>
-                    </tr>
-                    <tr ng-repeat-end>
-                        <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
-                            </span></td>
-                        <td><i class="icon-stopwatch"></i><span>{{r.tiempo}} |
-                                {{r.diferencia}}</span>
-                        </td>
-                        <!-- <div class="lbl-comentario"><span>{{r.comentario}} </div> -->
-                    </tr>
-                </table>
+                <div style="overflow: auto; max-height:calc(100vh - 280px);">
+                    <table>
+                        <tbody>
+
+                            <tr ng-repeat-start="r in vm.datos">
+                                <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
+                                <td colspan="3"><span>{{r.binomio}}</span></td>
+                                <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.pop($index)"
+                                        style="cursor:pointer; font-size: 20px; ">
+                                        <b>x</b>
+                                    </a></td>
+                            </tr>
+                            <tr ng-repeat-end>
+                                <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
+                                    </span></td>
+                                <td><i class="icon-stopwatch"></i><span>{{r.tiempo}} |
+                                        {{r.diferencia}}</span>
+                                </td>
+                                <!-- <div class="lbl-comentario"><span>{{r.comentario}} </div> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="footer">
-                <button style="margin-top: 20px; height: 50px;" class="w3-btn w3-teal w3-block"
-                    ng-click="vm.exportar()">Exportar</button>
+                <button ng-disabled="!vm.puedeExportar()" style="margin-top: 20px; height: 50px;"
+                    class="w3-btn w3-teal w3-block" ng-click="vm.exportar()">Exportar</button>
             </div>
         </div>
     </div>
