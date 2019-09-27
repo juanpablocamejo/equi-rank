@@ -5,11 +5,7 @@
             vm.datos = [];
             vm.tab = 1;
             vm.new = defaultItem();
-            vm.tiempoReferencia = 0.000;
-
-            // for (var i = 0; i < 8; i++) {
-            //     vm.datos.push(defaultItem('' + i));
-            // }
+            vm.tiempoReferencia = 0.0;
 
             _add = (delta) => () => { vm.new.tiempo = +(vm.new.tiempo + delta).toFixed(2); }
             _sub = (delta) => () => { if (vm.new.tiempo > 0) vm.new.tiempo = +(vm.new.tiempo - delta).toFixed(2); }
@@ -30,7 +26,7 @@
                 elem.ordenSalida = vm.datos.length + 1;
                 vm.datos.push(elem)
                 vm.new = defaultItem();
-                vm.actualizarDiferencias();
+                vm.actualizarDiferencias(vm.tiempoReferencia);
             }
 
             function defaultItem(pre) {
@@ -58,14 +54,16 @@
                 }
             }
 
-            vm.actualizarDiferencias = function () {
-                vm.datos = vm.datos.map(function (item) {
-                    item.diferencia = +Math.abs(vm.tiempoReferencia - item.tiempo).toFixed(2);
+            vm.actualizarDiferencias = function (tiempoReferencia) {
+                if (angular.isNumber(tiempoReferencia)) {
+                    vm.datos = vm.datos.map(function (item) {
+                        item.diferencia = +(Math.abs(tiempoReferencia - item.tiempo).toFixed(2));
 
-                    return item;
-                });
+                        return item;
+                    });
 
-                vm.datos.sort(comparar);
+                    vm.datos.sort(comparar);
+                }
             }
 
             vm.exportar = function () {
@@ -80,6 +78,4 @@
                 a.remove();
             }
         })
-
 })();
-

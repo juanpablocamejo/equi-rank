@@ -53,7 +53,7 @@
             <div style="display:grid; grid-template-columns: 1fr 1fr; margin-top:10px;">
                 <span style="text-align: right;align-self: center;">Tiempo Referencia: </span>
                 <input class="w3-input w3-border" type="number" min="0"  step="any" ng-model="vm.tiempoReferencia"
-                    ng-change="vm.actualizarDiferencias()">
+                    ng-change="vm.actualizarDiferencias(vm.tiempoReferencia)">
             </div>
             <div> <label><b>Resultados</b></label></div>
             <div style=" margin-top:10px;">
