@@ -8,20 +8,13 @@
   margin: 0;
 }
 
-.grid > ul > li {
+.grid li {
   display: grid;
-  grid-template-columns: repeat(2, minmax(60px, 1fr)) minmax(60px, 3fr) minmax(60px, 2fr) minmax(60px, 1fr) minmax(
-      60px,
-      6fr
-    );
-  grid-auto-rows: 38px;
+  grid-template-columns: 30px 1fr 1fr;
+  grid-template-rows: 22px 22px;
   justify-items: stretch;
   justify-content: stretch;
   align-items: end;
-}
-
-.grid > ul > li > div > input {
-  width: calc(100% - 5px);
 }
 
 body {
@@ -30,7 +23,7 @@ body {
 }
 
 .footer {
-  padding: 20px 20px;
+  margin-top: 10px;
   text-align: right;
 }
 input {
@@ -42,19 +35,26 @@ button {
   width: 150px;
 }
 
-.lbl {
-  height: 100%;
-  display: block;
-  font-weight: bold;
-  text-align: right;
-  padding: 12% 40%;
-}
-.grid-head div {
-  vertical-align: bottom;
-}
-
 .form-carga {
   display: grid;
   grid-template-columns: 100%;
-  grid-auto-rows: 1fr;
+  grid-template-rows: 20px repeat(5, 1fr);
+}
+
+.tabs button {
+  height: 40px;
+  line-height: 1;
+}
+
+tbody [rowspan],
+tbody [rowspan] ~ th,
+tbody [rowspan] ~ td,
+tfoot {
+  border-top: 1px solid gray;
+}
+
+table {
+  border-bottom: 1px solid gray;
+  border-collapse: collapse;
+  width: 100%;
 }

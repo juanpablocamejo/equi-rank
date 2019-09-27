@@ -15,7 +15,7 @@
             vm.sub = (delta) => _loop(_sub(delta))
 
             vm.stop = () => $interval.cancel(vm.interval);
-
+            vm.puedeGuardar = () => true
             vm.guardar = (elem) => {
                 vm.datos.push(elem)
                 vm.new = defaultItem();
