@@ -22,15 +22,15 @@
             ng-click="vm.tab=2">Resultados</button>
     </div>
     <div class="tab" ng-if="vm.tab==1">
-        <div class="form-carga">
+        <form class="form-carga">
             <div></div>
             <div>
                 <label><b>Binomio</b></label>
-                <input class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
+                <input tabindex="0" class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
             </div>
             <div>
                 <label><b>Tiempo</b></label>
-                <input class="w3-input w3-border" type="number" min="0" ng-model="vm.new.tiempo">
+                <input tabindex="0" class="w3-input w3-border" type="number" min="0" ng-model="vm.new.tiempo">
             </div>
             <div>
                 <label><b>Faltas</b></label>
@@ -41,13 +41,13 @@
                 <textarea class="w3-input w3-border" type="text" ng-model="vm.new.comentario"></textarea>
             </div>
             <div>
-                <button ng-disabled="!vm.puedeGuardar()" style="margin-top: 20px; height: 50px;"
+                <button type="button" ng-disabled="!vm.puedeGuardar()" style="margin-top: 20px; height: 50px;"
                     class="w3-btn w3-teal w3-block" ng-click="vm.guardar(vm.new)">Guardar</button>
             </div>
-        </div>
+    </div>
     </div>
     <div class="tab" ng-if="vm.tab==2">
-        <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 20px min(5fr,60vh) 1fr">
+        <form style="display:grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 20px min(5fr,60vh) 1fr">
             <div style=" margin-top:5px;">
                 <input class="w3-input w3-border" type="text" ng-model="vm.titulo" placeholder="Título">
             </div>
@@ -65,10 +65,10 @@
                             <tr ng-repeat-start="r in vm.datos">
                                 <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
                                 <td colspan="3"><span>N° {{r.ordenSalida}} - {{r.binomio}}</span></td>
-                                <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.pop($index)"
+                                <!-- <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.splice($index,1)"
                                         style="cursor:pointer; font-size: 20px; ">
                                         <b>x</b>
-                                    </a></td>
+                                    </a></td> -->
                             </tr>
                             <tr ng-repeat-end>
                                 <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
@@ -87,7 +87,7 @@
                     class="w3-btn w3-teal w3-block" ng-click="vm.exportar()">Exportar</button>
             </div>
 
-        </div>
+    </div>
     </div>
 
 </body>

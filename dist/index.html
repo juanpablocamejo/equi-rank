@@ -24,31 +24,31 @@ html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}html{-ms-text-siz
         <button ng-class="{'w3-opacity':vm.tab==2}" style="width: 50%;" class="w3-bar-item  w3-hover-opacity w3-teal w3-block w3-ripple" id="linkResultados" ng-click="vm.tab=2">Resultados</button>
     </div>
     <div class="tab" ng-if="vm.tab==1">
-        <div class="form-carga">
+        <form class="form-carga">
             <div></div>
             <div>
                 <label><b>Binomio</b></label>
-                <input class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
+                <input tabindex="0" class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
             </div>
             <div>
                 <label><b>Tiempo</b></label>
-                <input class="w3-input w3-border" type="number" ng-model="vm.new.tiempo">
+                <input tabindex="0" class="w3-input w3-border" type="number" min="0" ng-model="vm.new.tiempo">
             </div>
             <div>
                 <label><b>Faltas</b></label>
-                <input class="w3-input w3-border" type="number" ng-model="vm.new.faltas">
+                <input class="w3-input w3-border" type="number" min="0" ng-model="vm.new.faltas">
             </div>
             <div>
                 <label><b>Comentario</b></label>
                 <textarea class="w3-input w3-border" type="text" ng-model="vm.new.comentario"></textarea>
             </div>
             <div>
-                <button ng-disabled="!vm.puedeGuardar()" style="margin-top: 20px; height: 50px;" class="w3-btn w3-teal w3-block" ng-click="vm.guardar(vm.new)">Guardar</button>
+                <button type="button" ng-disabled="!vm.puedeGuardar()" style="margin-top: 20px; height: 50px;" class="w3-btn w3-teal w3-block" ng-click="vm.guardar(vm.new)">Guardar</button>
             </div>
-        </div>
-    </div>
+    </form></div>
+    
     <div class="tab" ng-if="vm.tab==2">
-        <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 20px min(5fr,60vh) 1fr">
+        <form style="display:grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr 20px min(5fr,60vh) 1fr">
             <div style=" margin-top:5px;">
                 <input class="w3-input w3-border" type="text" ng-model="vm.titulo" placeholder="Título">
             </div>
@@ -64,10 +64,11 @@ html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}html{-ms-text-siz
 
                             <tr ng-repeat-start="r in vm.datos">
                                 <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
-                                <td colspan="3"><span>{{r.binomio}}</span></td>
-                                <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.pop($index)" style="cursor:pointer; font-size: 20px; ">
+                                <td colspan="3"><span>N° {{r.ordenSalida}} - {{r.binomio}}</span></td>
+                                <!-- <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.splice($index,1)"
+                                        style="cursor:pointer; font-size: 20px; ">
                                         <b>x</b>
-                                    </a></td>
+                                    </a></td> -->
                             </tr>
                             <tr ng-repeat-end>
                                 <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
@@ -84,8 +85,9 @@ html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}html{-ms-text-siz
             <div class="footer">
                 <button ng-disabled="!vm.puedeExportar()" style="margin-top: 20px; height: 50px;" class="w3-btn w3-teal w3-block" ng-click="vm.exportar()">Exportar</button>
             </div>
-        </div>
-    </div>
+
+    </form></div>
+    
 
 </body>
 
@@ -99,6 +101,6 @@ html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}html{-ms-text-siz
 angular.module("rank",["ngMask"]);
 </script>
 <script>
-angular.module("rank").controller("rankCtrl",function($interval){function comparar(a,b){return f1=a.faltas||0,f2=b.faltas||0,d1=a.diferencia||0,d2=b.diferencia||0,f1==f2?d1-d2:f1-f2}vm=this,vm.datos=[],vm.tab=1,vm.new={binomio:null,tiempo:null,faltas:null,comentario:null,diferencia:0},vm.tiempoReferencia=0,_add=(delta=>()=>{vm.new.tiempo=+(vm.new.tiempo+delta).toFixed(2)}),_sub=(delta=>()=>{vm.new.tiempo>0&&(vm.new.tiempo=+(vm.new.tiempo-delta).toFixed(2))}),_loop=(fn=>vm.interval=$interval(fn,200)),vm.add=(delta=>_loop(_add(delta))),vm.sub=(delta=>_loop(_sub(delta))),vm.stop=(()=>$interval.cancel(vm.interval)),vm.puedeGuardar=(()=>![!!vm.new.binomio,!!vm.new.tiempo,!!vm.new.faltas].filter(x=>!x).length),vm.puedeExportar=(()=>!!vm.titulo&&!!vm.tiempoReferencia),vm.guardar=(elem=>{vm.datos.push(elem),vm.new={binomio:null,tiempo:null,faltas:null,comentario:null,diferencia:0},vm.actualizarDiferencias()}),vm.actualizarDiferencias=function(){vm.datos=vm.datos.map(function(item){return item.diferencia=+Math.abs(vm.tiempoReferencia-item.tiempo).toFixed(2),item}),vm.datos.sort(comparar)},vm.exportar=function(){}});
+angular.module("rank").controller("rankCtrl",function($interval){function comparar(a,b){return f1=a.faltas||0,f2=b.faltas||0,d1=a.diferencia||0,d2=b.diferencia||0,f1==f2?d1-d2:f1-f2}vm=this,vm.datos=[],vm.tab=1,vm.new={binomio:null,tiempo:null,faltas:0,comentario:null,diferencia:0,ordenSalida:0},vm.tiempoReferencia=0,_add=(delta=>()=>{vm.new.tiempo=+(vm.new.tiempo+delta).toFixed(2)}),_sub=(delta=>()=>{vm.new.tiempo>0&&(vm.new.tiempo=+(vm.new.tiempo-delta).toFixed(2))}),_loop=(fn=>vm.interval=$interval(fn,200)),vm.add=(delta=>_loop(_add(delta))),vm.sub=(delta=>_loop(_sub(delta))),vm.stop=(()=>$interval.cancel(vm.interval)),vm.puedeGuardar=(()=>![!!vm.new.binomio,!!vm.new.tiempo,null!=vm.new.faltas].filter(x=>!x).length),vm.puedeExportar=(()=>!!vm.titulo&&!!vm.tiempoReferencia),vm.guardar=(elem=>{elem.ordenSalida=vm.datos.length+1,vm.datos.push(elem),vm.new={binomio:null,tiempo:null,faltas:0,comentario:null,diferencia:0,ordenSalida:0},vm.actualizarDiferencias()}),vm.actualizarDiferencias=function(){vm.datos=vm.datos.map(function(item){return item.diferencia=+Math.abs(vm.tiempoReferencia-item.tiempo).toFixed(2),item}),vm.datos.sort(comparar)},vm.exportar=function(){var json=JSON.stringify({titulo:vm.titulo,tiempoReferencia:vm.tiempoReferencia,datos:vm.datos}),blob=new Blob([json],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.download=(new Date).toLocaleString().split("/").join("-").split(":").join(".")+".json",a.href=url,a.click(),a.remove()}});
 </script>
 

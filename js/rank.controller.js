@@ -20,7 +20,7 @@
 
             vm.stop = () => $interval.cancel(vm.interval);
             vm.puedeGuardar = () => {
-                var res = ![!!vm.new.binomio, !!vm.new.tiempo, !!vm.new.faltas].filter(x => !x).length
+                var res = ![!!vm.new.binomio, !!vm.new.tiempo, vm.new.faltas != null].filter(x => !x).length
                 return res;
             }
             vm.puedeExportar = () => {
@@ -37,7 +37,7 @@
                 return {
                     binomio: null,
                     tiempo: null,
-                    faltas: null,
+                    faltas: 0,
                     comentario: null,
                     diferencia: 0,
                     ordenSalida: 0
@@ -69,7 +69,15 @@
             }
 
             vm.exportar = function () {
+                var json = JSON.stringify({ titulo: vm.titulo, tiempoReferencia: vm.tiempoReferencia, datos: vm.datos });
+                var blob = new Blob([json], { type: "application/json" });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
 
+                a.download = (new Date().toLocaleString()).split('/').join('-').split(':').join('.') + '.json';
+                a.href = url;
+                a.click();
+                a.remove();
             }
         })
 
