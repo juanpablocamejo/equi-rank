@@ -6,6 +6,7 @@
             vm.tab = 1;
             vm.new = defaultItem();
             vm.tiempoReferencia = 0.000;
+            limpiarResultados();
 
             // for (var i = 0; i < 8; i++) {
             //     vm.datos.push(defaultItem('' + i));
@@ -33,6 +34,30 @@
                 vm.actualizarDiferencias();
             }
 
+            
+            vm.actualizarDiferencias = function () {
+                vm.datos = vm.datos.map(function (item) {
+                    item.diferencia = +Math.abs(vm.tiempoReferencia - item.tiempo).toFixed(2);
+
+                    return item;
+                });
+                
+                vm.datos.sort(comparar);
+            }
+
+            vm.exportar = function () {
+                var json = JSON.stringify({ titulo: vm.titulo, tiempoReferencia: vm.tiempoReferencia, datos: vm.datos });
+                var blob = new Blob([json], { type: "application/json" });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                
+                a.download = (new Date().toLocaleString()).split('/').join('-').split(':').join('.') + '.json';
+                a.href = url;
+                a.click();
+                a.remove();
+                limpiarResultados()
+            }
+            
             function defaultItem(pre) {
                 return {
                     binomio: null,
@@ -58,26 +83,10 @@
                 }
             }
 
-            vm.actualizarDiferencias = function () {
-                vm.datos = vm.datos.map(function (item) {
-                    item.diferencia = +Math.abs(vm.tiempoReferencia - item.tiempo).toFixed(2);
-
-                    return item;
-                });
-
-                vm.datos.sort(comparar);
-            }
-
-            vm.exportar = function () {
-                var json = JSON.stringify({ titulo: vm.titulo, tiempoReferencia: vm.tiempoReferencia, datos: vm.datos });
-                var blob = new Blob([json], { type: "application/json" });
-                var url = URL.createObjectURL(blob);
-                var a = document.createElement('a');
-
-                a.download = (new Date().toLocaleString()).split('/').join('-').split(':').join('.') + '.json';
-                a.href = url;
-                a.click();
-                a.remove();
+            function limpiarResultados() {
+                vm.datos = [];
+                vm.titulo = null
+                vm.tiempoReferencia = 0.0
             }
         })
 
