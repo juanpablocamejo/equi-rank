@@ -1,10 +1,11 @@
 const { src, dest } = require('gulp')
-var inline = require('gulp-inline')
-var uglify = require('gulp-uglify-es').default
-let cleanCSS = require('gulp-clean-css');
+const htmlmin = require('gulp-htmlmin');
+const inline = require('gulp-inline')
+const uglify = require('gulp-uglify-es').default
+const cleanCSS = require('gulp-clean-css');
 
 exports.default = function () {
-    return src('index.html')
+    return src('index.html')        
         .pipe(inline({
             base: '.',
             css: cleanCSS,
@@ -14,5 +15,6 @@ exports.default = function () {
                 })
             }
         }))
+        .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(dest('dist/'))
 }
