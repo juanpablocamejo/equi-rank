@@ -17,23 +17,10 @@
             <div>
                 <label><b>Binomio</b></label>
                 <input class="w3-input w3-border" type="text" ng-model="vm.new.binomio">
-
             </div>
             <div>
                 <label><b>Tiempo</b></label>
-                <div style="display:grid; grid-template-columns: 1fr">
-                    <div style="display:grid; grid-template-columns: 1fr 1fr">
-                        <button ng-mousedown="vm.add(1)" ng-mouseup="vm.stop()">+</button>
-                        <button ng-mousedown="vm.add(0.01)" ng-mouseup="vm.stop()">+</button>
-                    </div>
-                    <div>
-                        <input style="width: calc(100% - 1em);" type="number" ng-model="vm.new.tiempo">
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr">
-                        <button ng-mousedown="vm.sub(1)" ng-mouseup="vm.stop()">-</button>
-                        <button ng-mousedown="vm.sub(0.01)" ng-mouseup="vm.stop()">-</button>
-                    </div>
-                </div>
+                <input class="w3-input w3-border" type="number" ng-model="vm.new.tiempo">
             </div>
             <div>
                 <label><b>Faltas</b></label>
