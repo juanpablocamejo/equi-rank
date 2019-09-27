@@ -7,8 +7,7 @@
     <title>EquiRank</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/w3.css" />
-    <link rel="stylesheet" href="css/icons.css" />
-
+    <link rel="stylesheet" href="css/icons.css" />    
 </head>
 
 <body style="padding:2px;" ng-app="rank" ng-controller="rankCtrl as vm">
@@ -91,6 +90,12 @@
     </div>
 
 </body>
+
+<script type="text/javascript">
+    window.onbeforeunload = function() {
+        return "Estás seguro que queres salir de la aplicación? Exporta los datos antes...";
+    }
+</script>
 
 <script src="js/angular.min.js"></script>
 <script src="js/ng-mask.min.js"></script>
