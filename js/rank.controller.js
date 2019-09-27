@@ -32,7 +32,7 @@
             }
 
             
-            vm.actualizarDiferencias = function (tiempoReferencia) {
+            vm.actualizarDiferencias = (tiempoReferencia) => {
                 if (angular.isNumber(tiempoReferencia)) {
                     vm.datos = vm.datos.map(function (item) {
                         item.diferencia = +(Math.abs(tiempoReferencia - item.tiempo).toFixed(2));
@@ -44,7 +44,7 @@
                 }
             }
 
-            vm.exportar = function () {
+            vm.exportar = () => {
                 var json = JSON.stringify({ titulo: vm.titulo, tiempoReferencia: vm.tiempoReferencia, datos: vm.datos });
                 var blob = new Blob([json], { type: "application/json" });
                 var url = URL.createObjectURL(blob);

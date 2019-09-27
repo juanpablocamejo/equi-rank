@@ -67,8 +67,8 @@
                             <tr ng-repeat-end>
                                 <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
                                     </span></td>
-                                <td><i class="icon-stopwatch"></i><span>{{r.tiempo}} |
-                                        {{r.diferencia}}</span>
+                                <td><i class="icon-stopwatch"></i><span>{{r.tiempo | number : 2}} |
+                                        {{r.diferencia | number : 2}}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -86,13 +86,10 @@
 </body>
 
 <script type="text/javascript">
-    window.onbeforeunload = function() {
-        return "Estás seguro que queres salir de la aplicación? Exporta los datos antes...";
-    }
+    window.onbeforeunload = function() { return "Estás seguro que queres salir de la aplicación? Exporta los datos antes..."; }
 </script>
 
 <script src="js/angular.min.js"></script>
-<script src="js/ng-mask.min.js"></script>
 <script src="js/rank.module.js"></script>
 <script src="js/rank.controller.js"></script>
 

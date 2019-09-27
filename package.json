@@ -20,13 +20,7 @@
     "gulp-ng-annotate": "^2.1.0",
     "gulp-uglify-es": "^1.0.4",
     "gulp-clean-css": "^4.2.0",
-<<<<<<< HEAD
     "gulp-htmlmin": "^5.0.1",
-=======
-    "gulp-htmlmin": "^5.0.1"
-  },
-  "dependencies": {
->>>>>>> 2d85e47d378264bdfa147fd8a011ed3843cc63af
     "gulp-cli": "^2.2.0"
   }
 }

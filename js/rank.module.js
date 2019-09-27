@@ -1,4 +1,4 @@
 (function(){
-angular.module('rank',['ngMask'])
+angular.module('rank',[])
 
 })()
