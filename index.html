@@ -30,11 +30,11 @@
             </div>
             <div>
                 <label><b>Tiempo</b></label>
-                <input class="w3-input w3-border" type="number" ng-model="vm.new.tiempo">
+                <input class="w3-input w3-border" type="number" min="0" ng-model="vm.new.tiempo">
             </div>
             <div>
                 <label><b>Faltas</b></label>
-                <input class="w3-input w3-border" type="text" ng-model="vm.new.faltas">
+                <input class="w3-input w3-border" type="number" min="0" ng-model="vm.new.faltas">
             </div>
             <div>
                 <label><b>Comentario</b></label>
@@ -60,7 +60,7 @@
                 <table>
                     <tr ng-repeat-start="r in vm.datos">
                         <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
-                        <td colspan="2"><span>{{r.binomio}}</span></td>
+                        <td colspan="2"><span>N° {{r.ordenSalida}} - {{r.binomio}}</span></td>
                     </tr>
                     <tr ng-repeat-end>
                         <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
@@ -71,11 +71,10 @@
                         <!-- <div class="lbl-comentario"><span>{{r.comentario}} </div> -->
                     </tr>
                 </table>
-            </div>
-            <div class="footer">
-                <button style="margin-top: 20px; height: 50px;" class="w3-btn w3-teal w3-block"
+                <button style="margin-top: 50px; height: 50px;" class="w3-btn w3-teal w3-block"
                     ng-click="vm.exportar()">Exportar</button>
             </div>
+                            
         </div>
     </div>
 

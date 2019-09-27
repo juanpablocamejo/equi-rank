@@ -17,6 +17,7 @@
             vm.stop = () => $interval.cancel(vm.interval);
             vm.puedeGuardar = () => true
             vm.guardar = (elem) => {
+                elem.ordenSalida = vm.datos.length + 1;
                 vm.datos.push(elem)
                 vm.new = defaultItem();
                 vm.actualizarDiferencias();
@@ -26,9 +27,10 @@
                 return {
                     binomio: null,
                     tiempo: 0.0,
-                    faltas: Math.floor(Math.random() * 10),
+                    faltas: 0,
                     comentario: null,
-                    diferencia: 0
+                    diferencia: 0,
+                    ordenSalida: 0
                 };
             }
 
