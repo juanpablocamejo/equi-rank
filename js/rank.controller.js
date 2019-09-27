@@ -27,6 +27,7 @@
                 return !!vm.titulo && !!vm.tiempoReferencia
             }
             vm.guardar = (elem) => {
+                elem.ordenSalida = vm.datos.length + 1;
                 vm.datos.push(elem)
                 vm.new = defaultItem();
                 vm.actualizarDiferencias();
@@ -38,7 +39,8 @@
                     tiempo: null,
                     faltas: null,
                     comentario: null,
-                    diferencia: 0
+                    diferencia: 0,
+                    ordenSalida: 0
                 };
             }
 
