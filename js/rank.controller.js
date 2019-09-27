@@ -5,12 +5,12 @@
             vm.datos = [];
             vm.tab = 1;
             vm.new = defaultItem();
+            vm.tiempoReferencia = 0.000;
 
             // for (var i = 0; i < 8; i++) {
             //     vm.datos.push(defaultItem('' + i));
             // }
 
-            vm.tiempoReferencia = 0.000;
             _add = (delta) => () => { vm.new.tiempo = +(vm.new.tiempo + delta).toFixed(2); }
             _sub = (delta) => () => { if (vm.new.tiempo > 0) vm.new.tiempo = +(vm.new.tiempo - delta).toFixed(2); }
             _loop = (fn) => vm.interval = $interval(fn, 200)

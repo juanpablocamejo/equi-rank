@@ -29,11 +29,11 @@
             </div>
             <div>
                 <label><b>Tiempo</b></label>
-                <input tabindex="0" class="w3-input w3-border" type="number" min="0" ng-model="vm.new.tiempo">
+                <input tabindex="0" class="w3-input w3-border" type="number" min="0" step="any" ng-model="vm.new.tiempo">
             </div>
             <div>
                 <label><b>Faltas</b></label>
-                <input class="w3-input w3-border" type="number" min="0" ng-model="vm.new.faltas">
+                <input class="w3-input w3-border" type="number" min="0" step="4" ng-model="vm.new.faltas">
             </div>
             <div>
                 <label><b>Comentario</b></label>
@@ -52,7 +52,7 @@
             </div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; margin-top:10px;">
                 <span style="text-align: right;align-self: center;">Tiempo Referencia: </span>
-                <input class="w3-input w3-border" type="number" ng-model="vm.tiempoReferencia"
+                <input class="w3-input w3-border" type="number" min="0"  step="any" ng-model="vm.tiempoReferencia"
                     ng-change="vm.actualizarDiferencias()">
             </div>
             <div> <label><b>Resultados</b></label></div>
