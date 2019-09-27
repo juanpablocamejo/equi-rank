@@ -60,14 +60,9 @@
                 <div style="overflow: auto; max-height:calc(100vh - 280px);">
                     <table>
                         <tbody>
-
                             <tr ng-repeat-start="r in vm.datos">
                                 <td rowspan="2"><span><b>{{$index+1}}</b></span></td>
                                 <td colspan="3"><span>N° {{r.ordenSalida}} - {{r.binomio}}</span></td>
-                                <!-- <td rowspan="2"><a class="w3-text-red" ng-click="vm.datos.splice($index,1)"
-                                        style="cursor:pointer; font-size: 20px; ">
-                                        <b>x</b>
-                                    </a></td> -->
                             </tr>
                             <tr ng-repeat-end>
                                 <td><i class="icon-cancel-circled"></i><span>{{r.faltas}}
@@ -75,7 +70,6 @@
                                 <td><i class="icon-stopwatch"></i><span>{{r.tiempo}} |
                                         {{r.diferencia}}</span>
                                 </td>
-                                <!-- <div class="lbl-comentario"><span>{{r.comentario}} </div> -->
                             </tr>
                         </tbody>
                     </table>
