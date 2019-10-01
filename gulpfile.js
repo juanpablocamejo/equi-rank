@@ -4,6 +4,11 @@ const inline = require('gulp-inline')
 const uglify = require('gulp-uglify-es').default
 const cleanCSS = require('gulp-clean-css');
 
+function copySW() {
+    return src('./js/service-worker.js')
+    .pipe(dest('dist/'))
+}
+
 function copyManifest() {
     return src('./manifest.json')
         .pipe(dest('dist/'))
@@ -29,4 +34,4 @@ function bundle() {
         .pipe(dest('dist/'))
 }
 
-exports.default = parallel(copyIcons, copyManifest, bundle);
+exports.default = parallel(copySW, copyIcons, copyManifest, bundle);
