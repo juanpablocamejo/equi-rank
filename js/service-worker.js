@@ -1,8 +1,7 @@
-var cacheName = "sgtoilet-cache-" + Date.now();
+var cacheName = "sgtoilet-cache";
 var filesToCache = [
   "./",
-  "./index.html",
-  "./icons"
+  "./index.html"
 ];
 self.addEventListener("install", function(e) {
   e.waitUntil(
